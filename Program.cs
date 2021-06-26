@@ -6,7 +6,12 @@ namespace MaternityWard
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+             using (var db = new SqliteDbContext())
+             {
+                 Worker workerTable = new Worker{hourlyWage=12, workerType="dsada", Id="ddas"};
+                 db.Add(workerTable);
+                 db.SaveChanges();
+             }
         }
     }
 }
