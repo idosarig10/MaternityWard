@@ -2,28 +2,27 @@
 
 namespace MaternityWard.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class AddPrices : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Worker",
+                name: "Prices",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "TEXT", nullable: false),
-                    hourlyWage = table.Column<float>(type: "REAL", nullable: false),
-                    workerType = table.Column<string>(type: "TEXT", nullable: true)
+                    PriceName = table.Column<string>(type: "TEXT", nullable: false),
+                    PriceValue = table.Column<float>(type: "REAL", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Worker", x => x.Id);
+                    table.PrimaryKey("PK_Prices", x => x.PriceName);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Worker");
+                name: "Prices");
         }
     }
 }

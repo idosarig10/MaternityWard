@@ -15,15 +15,28 @@ namespace MaternityWard.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.7");
 
+            modelBuilder.Entity("MaternityWard.Prices", b =>
+                {
+                    b.Property<string>("PriceName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<float>("PriceValue")
+                        .HasColumnType("REAL");
+
+                    b.HasKey("PriceName");
+
+                    b.ToTable("Prices");
+                });
+
             modelBuilder.Entity("MaternityWard.Worker", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
-                    b.Property<float>("hourlyWage")
+                    b.Property<float>("HourlyWage")
                         .HasColumnType("REAL");
 
-                    b.Property<string>("workerType")
+                    b.Property<string>("WorkerType")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

@@ -8,9 +8,9 @@ namespace MaternityWard
         {
              using (var db = new SqliteDbContext())
              {
-                 Worker workerTable = new Worker{hourlyWage=12, workerType="dsada", Id="ddas"};
-                 db.Add(workerTable);
-                 db.SaveChanges();
+                Worker workerTable = new Worker{HourlyWage=12, WorkerType="dsada", Id=Guid.NewGuid().ToString()};
+                db.Add(workerTable);
+                db.SaveChanges();
              }
         }
     }
