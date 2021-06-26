@@ -7,8 +7,12 @@ namespace MaternityWard
 {
     class SqliteDbContext : DbContext
     {
-        public DbSet<Worker> Worker { get; set; }
-        public DbSet<Prices> Prices { get; set; }
+        public DbSet<Worker> Workers { get; set; }
+        public DbSet<Price> Prices { get; set; }
+        public DbSet<RankBonus> Bonuses { get; set; }
+        public DbSet<MonthWorkHours> MonthWorkHours { get; set; }
+
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {

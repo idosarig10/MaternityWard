@@ -2,28 +2,43 @@
 using MaternityWard;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MaternityWard.Migrations
 {
     [DbContext(typeof(SqliteDbContext))]
-    partial class SqliteDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210626162427_ChangeMonthWorkHoursToKeyless2")]
+    partial class ChangeMonthWorkHoursToKeyless2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.7");
 
+            modelBuilder.Entity("MaternityWard.Bonus", b =>
+                {
+                    b.Property<string>("BonousName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<float>("BonousValuePrecent")
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("PriceName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("BonousName");
+
+                    b.HasIndex("PriceName");
+
+                    b.ToTable("Bonuses");
+                });
+
             modelBuilder.Entity("MaternityWard.MonthWorkHours", b =>
                 {
                     b.Property<float>("Hours")
                         .HasColumnType("REAL");
-
-                    b.Property<string>("WorkerId")
-                        .HasColumnType("TEXT");
-
-                    b.HasIndex("WorkerId");
 
                     b.ToTable("MonthWorkHours");
                 });
@@ -39,24 +54,6 @@ namespace MaternityWard.Migrations
                     b.HasKey("PriceName");
 
                     b.ToTable("Prices");
-                });
-
-            modelBuilder.Entity("MaternityWard.RankBonus", b =>
-                {
-                    b.Property<string>("Rank")
-                        .HasColumnType("TEXT");
-
-                    b.Property<float>("BonusPercentages")
-                        .HasColumnType("REAL");
-
-                    b.Property<string>("PriceName")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Rank");
-
-                    b.HasIndex("PriceName");
-
-                    b.ToTable("Bonuses");
                 });
 
             modelBuilder.Entity("MaternityWard.Worker", b =>
@@ -75,16 +72,7 @@ namespace MaternityWard.Migrations
                     b.ToTable("Workers");
                 });
 
-            modelBuilder.Entity("MaternityWard.MonthWorkHours", b =>
-                {
-                    b.HasOne("MaternityWard.Worker", "Worker")
-                        .WithMany()
-                        .HasForeignKey("WorkerId");
-
-                    b.Navigation("Worker");
-                });
-
-            modelBuilder.Entity("MaternityWard.RankBonus", b =>
+            modelBuilder.Entity("MaternityWard.Bonus", b =>
                 {
                     b.HasOne("MaternityWard.Price", null)
                         .WithMany("Bonuses")
