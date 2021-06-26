@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using Microsoft.EntityFrameworkCore;
+using MaternityWard.Tables;
 
 namespace MaternityWard
 {
@@ -9,8 +10,9 @@ namespace MaternityWard
     {
         public DbSet<Worker> Workers { get; set; }
         public DbSet<Price> Prices { get; set; }
-        public DbSet<RankBonus> Bonuses { get; set; }
+        public DbSet<RankBonus> RankBonuses { get; set; }
         public DbSet<MonthWorkHours> MonthWorkHours { get; set; }
+        public DbSet<WorkTime> WorkTimes { get; set; }
 
 
 

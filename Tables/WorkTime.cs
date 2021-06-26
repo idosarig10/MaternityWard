@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MaternityWard.Tables
 {
-    class MonthWorkHours
+    class WorkTime
     {
         [Required]
         [Key]

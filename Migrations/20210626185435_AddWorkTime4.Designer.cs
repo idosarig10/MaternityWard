@@ -3,14 +3,16 @@ using System;
 using MaternityWard;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MaternityWard.Migrations
 {
     [DbContext(typeof(SqliteDbContext))]
-    partial class SqliteDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210626185435_AddWorkTime4")]
+    partial class AddWorkTime4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -18,13 +20,13 @@ namespace MaternityWard.Migrations
 
             modelBuilder.Entity("MaternityWard.Tables.MonthWorkHours", b =>
                 {
-                    b.Property<Guid>("WorkerId")
-                        .HasColumnType("TEXT");
-
                     b.Property<float>("Hours")
                         .HasColumnType("REAL");
 
-                    b.HasKey("WorkerId");
+                    b.Property<Guid>("WorkerId")
+                        .HasColumnType("TEXT");
+
+                    b.HasIndex("WorkerId");
 
                     b.ToTable("MonthWorkHours");
                 });

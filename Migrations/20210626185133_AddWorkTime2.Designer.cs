@@ -3,14 +3,16 @@ using System;
 using MaternityWard;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MaternityWard.Migrations
 {
     [DbContext(typeof(SqliteDbContext))]
-    partial class SqliteDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210626185133_AddWorkTime2")]
+    partial class AddWorkTime2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -18,13 +20,13 @@ namespace MaternityWard.Migrations
 
             modelBuilder.Entity("MaternityWard.Tables.MonthWorkHours", b =>
                 {
-                    b.Property<Guid>("WorkerId")
-                        .HasColumnType("TEXT");
-
                     b.Property<float>("Hours")
                         .HasColumnType("REAL");
 
-                    b.HasKey("WorkerId");
+                    b.Property<Guid>("WorkerId")
+                        .HasColumnType("TEXT");
+
+                    b.HasIndex("WorkerId");
 
                     b.ToTable("MonthWorkHours");
                 });
@@ -63,6 +65,7 @@ namespace MaternityWard.Migrations
             modelBuilder.Entity("MaternityWard.Tables.WorkTime", b =>
                 {
                     b.Property<Guid>("WorkerId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
                     b.Property<float>("Hours")
@@ -107,17 +110,6 @@ namespace MaternityWard.Migrations
                     b.HasOne("MaternityWard.Tables.Price", null)
                         .WithMany("Bonuses")
                         .HasForeignKey("PriceName");
-                });
-
-            modelBuilder.Entity("MaternityWard.Tables.WorkTime", b =>
-                {
-                    b.HasOne("MaternityWard.Tables.Worker", "Worker")
-                        .WithMany()
-                        .HasForeignKey("WorkerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Worker");
                 });
 
             modelBuilder.Entity("MaternityWard.Tables.Price", b =>
