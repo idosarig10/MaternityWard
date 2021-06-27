@@ -13,6 +13,10 @@ namespace MaternityWard
         public DbSet<RankBonus> RankBonuses { get; set; }
         public DbSet<MonthWorkHours> MonthWorkHours { get; set; }
         public DbSet<WorkTime> WorkTimes { get; set; }
+        public DbSet<WorkerRanks> WorkersRanks { get; set; }
+        public DbSet<MinimunMonthHours> MinimunMonthHours { get; set; }
+
+
 
 
 
@@ -24,7 +28,7 @@ namespace MaternityWard
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+            modelBuilder.Entity<WorkerRanks>().HasKey(wr => new { wr.WorkerId, wr.Rank });
         }
     }
 }

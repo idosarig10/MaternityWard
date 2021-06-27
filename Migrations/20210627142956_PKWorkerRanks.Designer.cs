@@ -3,31 +3,20 @@ using System;
 using MaternityWard;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MaternityWard.Migrations
 {
     [DbContext(typeof(SqliteDbContext))]
-    partial class SqliteDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210627142956_PKWorkerRanks")]
+    partial class PKWorkerRanks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.7");
-
-            modelBuilder.Entity("MaternityWard.Tables.MinimunMonthHours", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<float>("Hours")
-                        .HasColumnType("REAL");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MinimunMonthHours");
-                });
 
             modelBuilder.Entity("MaternityWard.Tables.MonthWorkHours", b =>
                 {
@@ -106,13 +95,14 @@ namespace MaternityWard.Migrations
 
             modelBuilder.Entity("MaternityWard.Tables.WorkerRanks", b =>
                 {
+                    b.Property<string>("Rank")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<Guid>("WorkerId")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Rank")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("WorkerId", "Rank");
+                    b.HasIndex("WorkerId");
 
                     b.ToTable("WorkersRanks");
                 });

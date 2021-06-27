@@ -17,8 +17,8 @@ namespace MaternityWard.RankSalaries
 
         public float Calculate(float salary)
         {
-            float hourlyWage = this.Db.Workers.Find(WorkerId.ToString()).HourlyWage;
-            float monthHours = this.Db.MonthWorkHours.Single(mwh => mwh.Worker.Id == WorkerId).Hours;
+            float hourlyWage = this.Db.Workers.Find(this.WorkerId).HourlyWage;
+            float monthHours = this.Db.MonthWorkHours.Find(this.WorkerId).Hours;
             return salary + hourlyWage * monthHours;
         }
     }

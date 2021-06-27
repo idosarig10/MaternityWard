@@ -6,11 +6,11 @@ using System.Text;
 
 namespace MaternityWard.RankSalaries
 {
-    class Senior: ISalary
+    class Expert : ISalary
     {
         public SqliteDbContext Db { set; get; }
         public Guid WorkerId { set; get; }
-        public Senior(SqliteDbContext db, Guid workerId)
+        public Expert(SqliteDbContext db, Guid workerId)
         {
             this.Db = db;
             this.WorkerId = workerId;
