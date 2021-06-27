@@ -8,7 +8,7 @@ namespace MaternityWard.RankSalaries
     interface ISalary
     {
         public SqliteDbContext Db { set; get; }
-        public Guid WorkerId { set; get; }
+        public string WorkerId { set; get; }
         public float Calculate(float salary);
     }
 }

@@ -8,10 +8,9 @@ namespace MaternityWard.Tables
 {
     class Worker
     {
+        [Key]
         [Required]
-        public Guid Id { get; set;}
-        [Required]
-        public float HourlyWage { get; set;}
+        public string Id { get; set;}
         [Required]
         public string WorkerType { get; set;}
     }

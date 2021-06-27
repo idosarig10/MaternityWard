@@ -1,15 +1,16 @@
-﻿using System;
+﻿using MaternityWard.Tables;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace MaternityWard.RankSalaries
 {
-    class Junior: ISalary
+    class Risk : ISalary
     {
         public SqliteDbContext Db { set; get; }
         public string WorkerId { set; get; }
-        public Junior(SqliteDbContext db, string workerId)
+        public Risk(SqliteDbContext db, string workerId)
         {
             this.Db = db;
             this.WorkerId = workerId;
@@ -17,9 +18,10 @@ namespace MaternityWard.RankSalaries
 
         public float Calculate(float salary)
         {
-            float hourlyRate = this.Db.HourlyRates.Find(this.WorkerId).Value;
-            float monthHours = this.Db.MonthWorkHours.Find(this.WorkerId).Hours;
-            return salary + hourlyRate * monthHours;
+            string workerType = this.Db.Workers.Find(WorkerId).WorkerType;
+            float riskBonous = this.Db.Bonuses.Find(workerType).BonusPercentage;
+            salary += (riskBonous / 100) * salary;
+            return salary;
         }
     }
 }

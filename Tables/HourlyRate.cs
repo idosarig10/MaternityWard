@@ -3,15 +3,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MaternityWard.Tables
 {
-    class Price
+    class HourlyRate
     {
         [Required]
         [Key]
-        public string PriceName { get; set; }
+        public string Id { get; set; }
         [Required]
-        public float PriceValue { get; set; }
-        [Required]
-        public List<RankBonus> Bonuses { get; set; }
-
+        public float Value { get; set; }
     }
 }

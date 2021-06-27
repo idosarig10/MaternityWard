@@ -8,14 +8,13 @@ namespace MaternityWard
 {
     class SqliteDbContext : DbContext
     {
-        public DbSet<Worker> Workers { get; set; }
-        public DbSet<Price> Prices { get; set; }
-        public DbSet<RankBonus> RankBonuses { get; set; }
+        public DbSet<Bonus> Bonuses { get; set; }
+        public DbSet<MonthActualWorkHours> MonthActualWorkHours { get; set; }
+        public DbSet<MonthMinimunWorkHours> MonthMinimunWorkHours { get; set; }
         public DbSet<MonthWorkHours> MonthWorkHours { get; set; }
-        public DbSet<WorkTime> WorkTimes { get; set; }
-        public DbSet<WorkerRanks> WorkersRanks { get; set; }
-        public DbSet<MinimunMonthHours> MinimunMonthHours { get; set; }
-
+        public DbSet<HourlyRate> HourlyRates { get; set; }
+        public DbSet<Worker> Workers { get; set; }
+        public DbSet<WorkerRanks> WorkerRanks { get; set; }
 
 
 

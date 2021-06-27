@@ -9,8 +9,8 @@ namespace MaternityWard.RankSalaries
     class Expert : ISalary
     {
         public SqliteDbContext Db { set; get; }
-        public Guid WorkerId { set; get; }
-        public Expert(SqliteDbContext db, Guid workerId)
+        public string WorkerId { set; get; }
+        public Expert(SqliteDbContext db, string workerId)
         {
             this.Db = db;
             this.WorkerId = workerId;
@@ -18,12 +18,12 @@ namespace MaternityWard.RankSalaries
 
         public float Calculate(float salary)
         {
-            float hourlyWage = this.Db.Workers.Find(WorkerId).HourlyWage;
-            RankBonus rankBonus = this.Db.RankBonuses.Find(this.GetType().Name);
-            float bonusPercentages = rankBonus.BonusPercentages;
-            float price = this.Db.Prices.Find(rankBonus.Rank).PriceValue;
-            float workTimeHours = this.Db.WorkTimes.Find(this.WorkerId).Hours;
-            return (workTimeHours * (hourlyWage + (price * bonusPercentages))) + salary;
+            float hourlyRate = this.Db.HourlyRates.Find(WorkerId).Value;
+            float bonusPercentages = this.Db.Bonuses.Find(this.GetType().Name).BonusPercentage;
+            float lawPrice = this.Db.HourlyRates.Find("Law").Value;
+            float monthActualWorkHours = this.Db.MonthActualWorkHours.Find(this.WorkerId).Hours;
+            float hourlyRateAfterBonous = hourlyRate + (bonusPercentages / 100) * lawPrice;
+            return monthActualWorkHours * hourlyRateAfterBonous + salary;
         }
     }
 }

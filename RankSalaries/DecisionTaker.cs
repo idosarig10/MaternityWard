@@ -9,8 +9,8 @@ namespace MaternityWard.RankSalaries
     class DecisionTaker : ISalary
     {
         public SqliteDbContext Db { set; get; }
-        public Guid WorkerId { set; get; }
-        public DecisionTaker(SqliteDbContext db, Guid workerId)
+        public string WorkerId { set; get; }
+        public DecisionTaker(SqliteDbContext db, string workerId)
         {
             this.Db = db;
             this.WorkerId = workerId;
@@ -18,13 +18,20 @@ namespace MaternityWard.RankSalaries
 
         public float Calculate(float salary)
         {
-            float hourlyWage = this.Db.Workers.Find(WorkerId).HourlyWage;
-            RankBonus rankBonus = this.Db.RankBonuses.Find(this.GetType().Name);
-            float bonusPercentages = rankBonus.BonusPercentages;
-            float price = this.Db.Prices.Find(rankBonus.Rank).PriceValue;
-            float workTimeHours = this.Db.WorkTimes.Find(this.WorkerId).Hours;
-            float minimunMonthHours = this.Db.MinimunMonthHours.Find(this.WorkerId.ToString()).Hours;
-            return (workTimeHours > minimunMonthHours ? 200 : 0 * (hourlyWage + (price * bonusPercentages))) + salary;
+            float monthWorkHours = this.Db.MonthWorkHours.Find(this.WorkerId).Hours;
+            float monthActualWorkHours = this.Db.MonthActualWorkHours.Find(this.WorkerId).Hours;
+            float monthMinimunWorkHours = this.Db.MonthMinimunWorkHours.Find(this.WorkerId).Hours;
+            float hourlyRate = this.Db.HourlyRates.Find(WorkerId).Value;
+            float bonusPercentages = this.Db.Bonuses.Find(this.GetType().Name).BonusPercentage;
+            float economyPrice = this.Db.HourlyRates.Find("Economy").Value;
+            float hourlyRateAfterBonous = hourlyRate + (bonusPercentages / 100) * economyPrice;
+            if (monthActualWorkHours < monthMinimunWorkHours)
+            {
+                return monthActualWorkHours * hourlyRateAfterBonous + salary;
+            } else
+            {
+                return monthWorkHours * hourlyRateAfterBonous + salary;
+            }
         }
     }
 }

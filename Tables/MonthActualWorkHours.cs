@@ -5,17 +5,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MaternityWard.Tables
 {
-    class WorkTime
+    class MonthActualWorkHours
     {
         [Required]
         [Key]
         [ForeignKey("Worker")]
-        public Guid WorkerId { get; set; }
+        public string WorkerId { get; set; }
         [Required]
         public float Hours { get; set; }
         [Required]
         public Worker Worker { get; set; }
-
     }
-
 }
