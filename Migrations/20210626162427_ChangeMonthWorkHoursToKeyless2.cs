@@ -2,28 +2,25 @@
 
 namespace MaternityWard.Migrations
 {
-    public partial class AddTableTest : Migration
+    public partial class ChangeMonthWorkHoursToKeyless2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "dasd",
+                name: "MonthWorkHours",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "TEXT", nullable: false),
-                    hourlyWage = table.Column<float>(type: "REAL", nullable: false),
-                    workerType = table.Column<string>(type: "TEXT", nullable: true)
+                    Hours = table.Column<float>(type: "REAL", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_dasd", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "dasd");
+                name: "MonthWorkHours");
         }
     }
 }

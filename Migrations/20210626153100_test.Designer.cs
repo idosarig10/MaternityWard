@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MaternityWard.Migrations
 {
     [DbContext(typeof(SqliteDbContext))]
-    [Migration("20210626010618_DeleteTableTest")]
-    partial class DeleteTableTest
+    [Migration("20210626153100_test")]
+    partial class test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,10 +22,10 @@ namespace MaternityWard.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
-                    b.Property<float>("hourlyWage")
+                    b.Property<float>("HourlyWage")
                         .HasColumnType("REAL");
 
-                    b.Property<string>("workerType")
+                    b.Property<string>("WorkerType")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

@@ -2,7 +2,7 @@
 
 namespace MaternityWard.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class test : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,8 +11,8 @@ namespace MaternityWard.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
-                    hourlyWage = table.Column<float>(type: "REAL", nullable: false),
-                    workerType = table.Column<string>(type: "TEXT", nullable: true)
+                    HourlyWage = table.Column<float>(type: "REAL", nullable: false),
+                    WorkerType = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
