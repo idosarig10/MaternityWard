@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MaternityWard.Tables;
 
 namespace MaternityWard.RankSalaries
 {
-    class Junior: ISalary
+    class Junior : ISalary
     {
         public SqliteDbContext Db { set; get; }
         public string WorkerId { set; get; }
