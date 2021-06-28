@@ -20,7 +20,7 @@ namespace MaternityWard.RankSalaries
         {
             float monthWorkHours = this.Db.MonthWorkHours.Find(this.WorkerId).Hours;
             float monthActualWorkHours = this.Db.MonthActualWorkHours.Find(this.WorkerId).Hours;
-            float monthMinimunWorkHours = this.Db.MonthMinimunWorkHours.Find(this.WorkerId).Hours;
+            float monthMinimunWorkHours = this.Db.MonthMinimunWorkHours.Single(mmh => mmh.Rank == this.GetType().Name).Hours;
             float hourlyRate = this.Db.HourlyRates.Find(WorkerId).Value;
             float bonusPercentages = this.Db.Bonuses.Find(this.GetType().Name).BonusPercentage;
             float economyPrice = this.Db.HourlyRates.Find("Economy").Value;

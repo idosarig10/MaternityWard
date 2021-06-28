@@ -20,7 +20,7 @@ namespace MaternityWard.RankSalaries
         {
             float hourlyRate = this.Db.HourlyRates.Find(WorkerId).Value;
             float bonusPercentages = this.Db.Bonuses.Find(this.GetType().Name).BonusPercentage;
-            float economyPrice = this.Db.HourlyRates.Find("economy").Value;
+            float economyPrice = this.Db.HourlyRates.Find("Economy").Value;
             float monthActualWorkHours = this.Db.MonthActualWorkHours.Find(this.WorkerId).Hours;
             float hourlyRateAfterBonous = hourlyRate + (bonusPercentages / 100) * economyPrice;
             return monthActualWorkHours * hourlyRateAfterBonous + salary;
