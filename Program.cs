@@ -16,6 +16,9 @@ namespace MaternityWard
                 //db.Add(worker);
                 //db.SaveChanges();
                 //Console.WriteLine(senior.Calculate(0));
+                //ToxicMaterialsCleaner toxicMaterialsCleaner = new ToxicMaterialsCleaner(db, "Mr. ToxicMaterialsCleaner");
+                //var c = toxicMaterialsCleaner.Calculate();
+
             };
         }
     }
