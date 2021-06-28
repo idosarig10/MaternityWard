@@ -14,7 +14,6 @@ namespace MaternityWard
         public DbSet<MonthWorkHours> MonthWorkHours { get; set; }
         public DbSet<HourlyRate> HourlyRates { get; set; }
         public DbSet<Worker> Workers { get; set; }
-        public DbSet<WorkerTypeRank> workerTypeRanks { get; set; }
 
 
 
