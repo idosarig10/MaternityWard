@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using MaternityWard.Tables;
 using System.Reflection;
 using System.Linq;
+using MaternityWard.Workers;
 
 namespace MaternityWard
 {
@@ -56,6 +57,21 @@ namespace MaternityWard
             monthActualWorkHours.Hours += duration;
             db.SaveChanges();
             Console.WriteLine("Done");
+        }
+
+        public static void CalculateSalary(SqliteDbContext db, Assembly assembly)
+        {
+            Console.WriteLine("Choose worker Id:");
+            List<Worker> workers = db.Workers.ToList();
+            for (int i = 0; i < workers.Count; i++)
+            {
+                Console.WriteLine(i.ToString() + ". " + workers[i].Id);
+            }
+            int workerIdIndex = int.Parse(Console.ReadLine());
+            Worker worker = workers[workerIdIndex];
+            System.Type workerTypeClass = assembly.GetTypes().First(t => String.Equals(t.Namespace, "MaternityWard.Workers", StringComparison.Ordinal) && t.Name.Equals(worker.WorkerType));
+            IWorker workerInstance = (IWorker)Activator.CreateInstance(workerTypeClass, db, worker.Id);
+            Console.WriteLine(workerInstance.Calculate());
         }
     }
 }
