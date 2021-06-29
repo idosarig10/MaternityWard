@@ -20,8 +20,8 @@ namespace MaternityWard
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            //string path = ConfigurationManager.ConnectionStrings["WorkersData"].ConnectionString;
-            options.UseSqlite(@"DataSource=C:\Users\idosarig\source\repos\MaternityWard\WorkersData.db");
+            string path = ConfigurationManager.ConnectionStrings["WorkersData"].ConnectionString;
+            options.UseSqlite(path);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
