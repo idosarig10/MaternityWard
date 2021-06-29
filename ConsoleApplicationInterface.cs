@@ -33,7 +33,29 @@ namespace MaternityWard
             db.MonthWorkHours.Add(new MonthWorkHours { WorkerId = workerId, Hours = monthWorkHours });
             db.MonthActualWorkHours.Add(new MonthActualWorkHours { WorkerId = workerId, Hours = monthActualWorkHours });
             db.SaveChanges();
+            Console.WriteLine("Done");
         }
-        
+
+
+        public static void AddWorkTime(SqliteDbContext db)
+        {
+            Console.WriteLine("Choose worker Id:");
+            List<string> workersIds = db.Workers.Select(worker => worker.Id).ToList();
+            for (int i = 0; i < workersIds.Count; i++)
+            {
+                Console.WriteLine(i.ToString() + ". " + workersIds[i]);
+            }
+            int workerIdIndex = int.Parse(Console.ReadLine());
+            string workerId = workersIds[workerIdIndex];
+            Console.WriteLine("Enter start time:");
+            DateTime startTime = DateTime.Parse(Console.ReadLine());
+            Console.WriteLine("Enter end time:");
+            DateTime endTime = DateTime.Parse(Console.ReadLine());
+            float duration = (float)(endTime - startTime).TotalHours;
+            MonthActualWorkHours monthActualWorkHours = db.MonthActualWorkHours.Find(workerId);
+            monthActualWorkHours.Hours += duration;
+            db.SaveChanges();
+            Console.WriteLine("Done");
+        }
     }
 }
