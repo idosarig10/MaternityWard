@@ -3,16 +3,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MaternityWard.RankSalaries;
 
-namespace MaternityWard.RankSalaries
+namespace MaternityWard.Workers
 {
     class InternshipDoctorBreech : IWorker
     {
         public SqliteDbContext Db { set; get; }
         public string WorkerId { get; }
 
-        public Junior Junior { get; };
-        public Expert Expert { get; };
+        public Junior Junior { get; }
+        public Expert Expert { get; }
         public InternshipDoctorBreech(SqliteDbContext db, string workerId)
         {
             this.Junior = new Junior(db, workerId);

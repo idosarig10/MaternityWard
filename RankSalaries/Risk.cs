@@ -19,7 +19,7 @@ namespace MaternityWard.RankSalaries
         public float Calculate(float salary)
         {
             string workerType = this.Db.Workers.Find(this.WorkerId).WorkerType;
-            float riskBonous = this.Db.Bonuses.Find(w   ).BonusPercentage;
+            float riskBonous = this.Db.Bonuses.Find(workerType).BonusPercentage;
             salary += (riskBonous / 100) * salary;
             return salary;
         }

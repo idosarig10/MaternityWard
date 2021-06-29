@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MaternityWard.Tables;
+using MaternityWard.RankSalaries;
 
-namespace MaternityWard.RankSalaries
+namespace MaternityWard.Workers
 {
     class MidwifeBreech : IWorker
     {
