@@ -9,10 +9,10 @@ namespace MaternityWard.RankSalaries
     class InternshipDoctorBreech : IWorker
     {
         public SqliteDbContext Db { set; get; }
-        public string WorkerId { set; get; }
+        public string WorkerId { get; }
 
-        public Junior Junior;
-        public Expert Expert;
+        public Junior Junior { get; };
+        public Expert Expert { get; };
         public InternshipDoctorBreech(SqliteDbContext db, string workerId)
         {
             this.Junior = new Junior(db, workerId);

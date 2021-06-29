@@ -11,7 +11,7 @@ namespace MaternityWard.RankSalaries
         public DecisionTaker DecisionTaker;
         public Manager Manager;
         public SqliteDbContext Db { set; get; }
-        public string WorkerId { set; get; }
+        public string WorkerId { get; }
         public DeputyHeadOfDepartment(SqliteDbContext db, string workerId)
         {
             this.DecisionTaker = new DecisionTaker(db, workerId);
@@ -22,14 +22,6 @@ namespace MaternityWard.RankSalaries
         public float Calculate()
         {
             return this.Manager.Calculate(this.DecisionTaker.Calculate(0));
-        }
-        public void AddToDb(float hourlyRate, float monthWorkHours, float monthActualWorkHours = 0)
-        {
-            this.Db.Workers.Add(new Worker { Id = this.WorkerId, WorkerType = this.GetType().Name});
-            this.Db.HourlyRates.Add(new HourlyRate { Id = this.WorkerId, Value = hourlyRate });
-            this.Db.MonthWorkHours.Add(new MonthWorkHours { WorkerId = this.WorkerId, Hours = monthWorkHours });
-            this.Db.MonthActualWorkHours.Add(new MonthActualWorkHours { WorkerId = this.WorkerId, Hours = monthActualWorkHours });
-            this.Db.SaveChanges();
         }
     }
 }
