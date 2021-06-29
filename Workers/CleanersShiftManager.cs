@@ -1,5 +1,4 @@
-﻿using MaternityWard.Tables;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,21 +6,20 @@ using MaternityWard.RankSalaries;
 
 namespace MaternityWard.Workers
 {
-    class Cleaner: IWorker
+    class CleanersShiftManager : IWorker
     {
+        public DecisionTaker DecisionTaker { get; }
         public SqliteDbContext Db { set; get; }
         public string WorkerId { get; }
-
-        public Junior Junior;
-        public Cleaner(SqliteDbContext db, string workerId)
+        public CleanersShiftManager(SqliteDbContext db, string workerId)
         {
-            this.Junior = new Junior(db, workerId);
+            this.DecisionTaker = new DecisionTaker(db, workerId);
             this.Db = db;
-            this.WorkerId = WorkerId;
+            this.WorkerId = workerId;
         }
         public float Calculate()
         {
-            return this.Junior.Calculate(0);
+            return this.DecisionTaker.Calculate(0);
         }
     }
 }

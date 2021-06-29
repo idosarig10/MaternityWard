@@ -1,27 +1,26 @@
-﻿using MaternityWard.Tables;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MaternityWard.Tables;
 using MaternityWard.RankSalaries;
 
 namespace MaternityWard.Workers
 {
-    class Cleaner: IWorker
+    class MidwifeBreech : IWorker
     {
+        public Expert Expert { get; }
         public SqliteDbContext Db { set; get; }
         public string WorkerId { get; }
-
-        public Junior Junior;
-        public Cleaner(SqliteDbContext db, string workerId)
+        public MidwifeBreech(SqliteDbContext db, string workerId)
         {
-            this.Junior = new Junior(db, workerId);
+            this.Expert = new Expert(db, workerId);
             this.Db = db;
-            this.WorkerId = WorkerId;
+            this.WorkerId = workerId;
         }
         public float Calculate()
         {
-            return this.Junior.Calculate(0);
+            return this.Expert.Calculate(0);
         }
     }
 }

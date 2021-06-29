@@ -7,21 +7,23 @@ using MaternityWard.RankSalaries;
 
 namespace MaternityWard.Workers
 {
-    class Cleaner: IWorker
+    class TraineeBreech : IWorker
     {
         public SqliteDbContext Db { set; get; }
         public string WorkerId { get; }
 
         public Junior Junior;
-        public Cleaner(SqliteDbContext db, string workerId)
+        public Expert Expert;
+        public TraineeBreech(SqliteDbContext db, string workerId)
         {
             this.Junior = new Junior(db, workerId);
+            this.Expert = new Expert(db, workerId);
             this.Db = db;
             this.WorkerId = WorkerId;
         }
         public float Calculate()
         {
-            return this.Junior.Calculate(0);
+            return this.Expert.Calculate(this.Junior.Calculate(0));
         }
     }
 }

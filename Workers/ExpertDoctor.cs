@@ -7,26 +7,24 @@ using MaternityWard.RankSalaries;
 
 namespace MaternityWard.Workers
 {
-    class ToxicMaterialsCleaner : IWorker
+    class ExpertDoctor : IWorker
     {
-        public Junior Junior;
-        public DecisionTaker DecisionTaker;
-        public Risk Risk;
+        public Senior Senior;
         public Expert Expert;
+        public DecisionTaker DecisionTaker { get; }
         public SqliteDbContext Db { set; get; }
         public string WorkerId { get; }
-        public ToxicMaterialsCleaner(SqliteDbContext db, string workerId)
+        public ExpertDoctor(SqliteDbContext db, string workerId)
         {
-            this.Junior = new Junior(db, workerId);
             this.DecisionTaker = new DecisionTaker(db, workerId);
-            this.Risk = new Risk(db, workerId);
+            this.Senior = new Senior(db, workerId);
             this.Expert = new Expert(db, workerId);
             this.Db = db;
             this.WorkerId = workerId;
         }
         public float Calculate()
         {
-            return this.Risk.Calculate(this.Expert.Calculate(this.DecisionTaker.Calculate(this.Junior.Calculate(0))));
+            return this.Expert.Calculate(this.Senior.Calculate(this.DecisionTaker.Calculate(0)));
         }
     }
 }
